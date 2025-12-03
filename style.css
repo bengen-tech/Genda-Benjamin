@@ -14,7 +14,7 @@ body {
 .hero {
   height: 100vh;
   width: 100%;
-  background-image: url("Gemini.png"); /* change to your image */
+  background-image: url("Gemini.jpg"); /* change to your image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -156,4 +156,5 @@ nav a:hover {
 .highlight{
   font-style: monospace;
 }
+
 
