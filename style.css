@@ -277,6 +277,7 @@ footer { background:#111; color:#fff; padding:20px 0; text-align:center; border:
 
 
 
+  .animated-tiles{
   margin-top: 5px;
   height: 24px;
   overflow: hidden;
@@ -290,4 +291,5 @@ footer { background:#111; color:#fff; padding:20px 0; text-align:center; border:
   height: 24px;
   animation: slide 8s infinite;
 }
+
 
