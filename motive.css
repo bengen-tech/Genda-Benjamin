@@ -1,0 +1,189 @@
+/* 1. IMPORT FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+/* 2. VARIABLES & RESET */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: rgba(31, 38, 135, 0.15);
+    --text-primary: #2d3436;
+    --text-secondary: #5a6063;
+    --pill-bg: rgba(255, 255, 255, 0.4); /* Slightly lighter for better contrast */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* 3. MOVING GRADIENT BACKGROUND */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    /* Soft pastel gradient */
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+/* 4. HEADER STYLES */
+header {
+    text-align: center;
+    padding: 4rem 1rem 3rem;
+    color: white; /* Kept white for contrast on gradient */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation: fadeIn 1.5s ease-out;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* 5. GRID CONTAINER */
+.container {
+    display: grid;
+    /* Responsive columns: fit as many as possible, minimum 300px wide */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    width: 90%;
+    padding-bottom: 5rem;
+}
+
+/* Styling for the "Gathering wisdom..." loading text */
+.container p {
+    grid-column: 1 / -1; /* Span full width */
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    font-style: italic;
+    animation: pulse 2s infinite;
+}
+
+/* 6. GLASSMORPHISM CARD */
+.card {
+    background: var(--glass-bg);
+    /* The blur effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px 0 var(--glass-shadow);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.4s ease, 
+                background 0.4s ease;
+    
+    /* Animation Setup */
+    opacity: 0; 
+    transform: translateY(30px);
+    animation: floatUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    
+    /* Flex layout to push author to bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 45px 0 rgba(31, 38, 135, 0.25);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 7. CARD CONTENT */
+.card-type {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: var(--pill-bg);
+    padding: 6px 12px;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+}
+
+/* Specific Colors for Categories (Optional Add-on) */
+.card-type.engineering { color: #0056b3; background: rgba(0, 86, 179, 0.1); }
+.card-type.solitude { color: #6a1b9a; background: rgba(106, 27, 154, 0.1); }
+.card-type.discipline { color: #c62828; background: rgba(198, 40, 40, 0.1); }
+.card-type.scripture { color: #f57f17; background: rgba(245, 127, 23, 0.1); }
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    flex-grow: 1; /* Pushes the author down */
+}
+
+/* Small adjustments for very long verses */
+@media (max-width: 768px) {
+    .quote-text { font-size: 1.3rem; }
+}
+
+.author {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: normal;
+    position: relative;
+    padding-top: 1rem;
+}
+
+.author::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 2px;
+    background: rgba(0,0,0,0.1);
+}
+
+/* 8. ANIMATION KEYFRAMES */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatUp {
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
